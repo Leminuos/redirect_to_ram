@@ -4,7 +4,7 @@ include Core/Makefile
 include Driver/Makefile
 include Library/Makefile
 
-TARGET    	:= test
+TARGET    	:= firmware
 TOOL_DIR    := C:/GNU_Toolchain/bin
 LDSCRIPT	:= ./LinkerScript.ld
 BUILD_DIR  	:= ./Build

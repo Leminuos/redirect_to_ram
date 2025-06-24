@@ -1,6 +1,7 @@
 #include "stm32_driver_uart.h"
 #include <stdio.h>
 
+#if defined (__CC_ARM)
 struct __FILE
 {
     int handle;
@@ -18,6 +19,7 @@ int fputc(int ch, FILE *f)
     USART_Transmiter(USART2, (uint8_t)ch);
     return ch;
 }
+#endif
 
 void USARTInit(void)
 {

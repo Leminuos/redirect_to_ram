@@ -49,7 +49,7 @@ CCFLAGS 	+= -MMD -MP -MF"$(@:%.o=%.d)"
 # Linker flags
 LIBS 		= -lc -lm -lnosys 
 LIBDIR 		= 
-LDFLAGS		:= $(MCU) -specs=nosys.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+LDFLAGS		:= $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # Object files
 OBJ_FILES	= $(patsubst %.c, %.o, $(notdir $(SRC_FILES)))
@@ -60,11 +60,13 @@ OBJ_PATHS	:= $(foreach OBJ_FILE, $(OBJ_FILES), $(BUILD_DIR)/$(OBJ_FILE))
 
 build: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
+rebuild: clean build
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CCFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR) 
-	$(AS) -c $(ASFLAGS) -o $@ $<
+	$(AS) -c $(CCFLAGS) -o $@ $<
  
 $(BUILD_DIR)/$(TARGET).elf: $(OBJ_PATHS)
 	$(CC) $(LDFLAGS) -o $@ $^

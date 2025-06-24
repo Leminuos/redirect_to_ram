@@ -81,14 +81,14 @@ void prvGetRegistersFromStack(uint32_t* pulFaultStackAddress)
     pc  = pulFaultStackAddress[6];
     psr = pulFaultStackAddress[7];
 
-    printf("r0  : %08X\r\n", r0);
-    printf("r1  : %08X\r\n", r1);
-    printf("r2  : %08X\r\n", r2);
-    printf("r3  : %08X\r\n", r3);
-    printf("r12 : %08X\r\n", r12);
-    printf("lr  : %08X\r\n", lr);
-    printf("pc  : %08X\r\n", pc);
-    printf("psr : %08X\r\n", psr);
+    // printf("r0  : %08X\r\n", r0);
+    // printf("r1  : %08X\r\n", r1);
+    // printf("r2  : %08X\r\n", r2);
+    // printf("r3  : %08X\r\n", r3);
+    // printf("r12 : %08X\r\n", r12);
+    // printf("lr  : %08X\r\n", lr);
+    // printf("pc  : %08X\r\n", pc);
+    // printf("psr : %08X\r\n", psr);
 
     // Soft reset
 }
