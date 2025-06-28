@@ -14,7 +14,6 @@ void init(void)
 {
     setupHardware();
     SystickConfig(71999);
-    TimerConfig();
     TestLed();
     USB_PowerOnReset();
     HID_SendCommandList();
