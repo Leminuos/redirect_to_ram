@@ -1,12 +1,15 @@
 #include "stm32_interrupt.h"
-#include "main.h"
+#include "stm32_hal_usb.h"
 
 extern void ButtonProcess(void);
 void prvGetRegistersFromStack(uint32_t* pulFaultStackAddress);
 
+extern uint32_t u32Tick;
+
 void SysTick_Handler(void)
 {
-    ButtonProcess();
+    ++u32Tick;
+    // ButtonProcess();
 }
 
 void HardFault_Handler(void)

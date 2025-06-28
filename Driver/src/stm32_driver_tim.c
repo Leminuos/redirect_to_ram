@@ -1,23 +1,22 @@
 #include "stm32_driver_tim.h"
 
-uint32_t u32Count;
+uint32_t u32Tick;
 
-uint32_t TIM_GetTimerCount(void)
+uint32_t GetCounterTick(void)
 {
-    return u32Count;
+    return u32Tick;
 }
 
 void delay(uint16_t mDelay)
 {
-    uint32_t currTime = TIM_GetTimerCount();
-    while (TIM_GetTimerCount() - currTime < mDelay);
+    uint32_t currTime = GetCounterTick();
+    while (GetCounterTick() - currTime < mDelay);
 }
 
 void TIM2_IRQHandler(void)
 {
     if (TIM2->DIER.BITS.UIE && TIM2->SR.BITS.UIF)
     {
-        u32Count++;
         TIM2->SR.BITS.UIF = 0;
         NVIC_ClearPendingIRQ(TIM2_IRQn);
     }

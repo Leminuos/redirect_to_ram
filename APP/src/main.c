@@ -18,14 +18,11 @@ void init(void)
     TestLed();
     USB_PowerOnReset();
     HID_SendCommandList();
-    ButtonConfig();
-    RegisterButtonEvent(HandleButtonEvent);
 }
 
 void loop(void)
 {
-    GPIOC->ODR.BITS.ODR13 = !GPIOC->ODR.BITS.ODR13;
-    delay(200);
+    
 }
 
 void SystickConfig(uint32_t u32Reload)
