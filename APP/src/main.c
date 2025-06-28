@@ -14,14 +14,15 @@ void init(void)
 {
     setupHardware();
     SystickConfig(71999);
+    TraceInit();
     TestLed();
-    USB_PowerOnReset();
-    HID_SendCommandList();
 }
 
 void loop(void)
 {
-    
+    GPIOC->ODR.BITS.ODR13 = !GPIOC->ODR.BITS.ODR13;
+    DEBUG(LOG_WARN, "LOOP", "Nguyen %d", 28);
+    delay(1000);
 }
 
 void SystickConfig(uint32_t u32Reload)
