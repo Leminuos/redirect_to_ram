@@ -43,6 +43,10 @@ C_INCLUDES	:= $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
 ASFLAGS     = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -fdata-sections -ffunction-sections
 CCFLAGS		+= $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -fdata-sections -ffunction-sections
 
+ifeq ($(DEBUG), 1)
+CFLAGS += -g -gdwarf-2
+endif
+
 # Generate dependency information
 CCFLAGS 	+= -MMD -MP -MF"$(@:%.o=%.d)"
 
