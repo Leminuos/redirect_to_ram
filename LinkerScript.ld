@@ -61,8 +61,8 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-  RAM (xrw)		: ORIGIN = 0x20000000, LENGTH = 20K
-  FLASH (rx)	: ORIGIN = 0x8000000, LENGTH = 64K
+  IRAM (xrw)		: ORIGIN = 0x20000000, LENGTH = 10K
+  DRAM (rx)	    : ORIGIN = 0x20002800, LENGTH = 10K
 }
 
 /* Sections */
@@ -74,7 +74,7 @@ SECTIONS
     . = ALIGN(4);
     KEEP(*(.isr_vector)) /* Startup code */
     . = ALIGN(4);
-  } >FLASH
+  } >IRAM
 
   /* The program code and other data into FLASH memory */
   .text :
@@ -87,22 +87,22 @@ SECTIONS
     *(.eh_frame)
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+  } >IRAM
 
-  /* Constant data into FLASH memory*/
+  /* Constant data into IRAM memory*/
   .rodata :
   {
     . = ALIGN(4);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
-  } >FLASH
+  } >IRAM
 
 
   /* Used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 
-  /* Initialized data sections into RAM memory */
+  /* Initialized data sections into DRAM memory */
   .data : 
   {
     . = ALIGN(4);
@@ -112,10 +112,10 @@ SECTIONS
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } >RAM AT> FLASH
+  } >DRAM AT> IRAM
 
   
-  /* Uninitialized data section into RAM memory */
+  /* Uninitialized data section into DRAM memory */
   . = ALIGN(4);
   .bss :
   {
@@ -129,9 +129,9 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-  } >RAM
+  } >DRAM
 
-  /* User_heap_stack section, used to check that there is enough RAM left */
+  /* User_heap_stack section, used to check that there is enough DRAM left */
   ._user_heap_stack :
   {
     . = ALIGN(8);
@@ -140,7 +140,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
-  } >RAM
+  } >DRAM
 
   /* Remove information fFLASH the standard libraries */
   /DISCARD/ :

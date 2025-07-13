@@ -1,12 +1,19 @@
 #include "main.h"
 
+void ram_test(void)
+{
+    GPIOC->ODR.BITS.ODR13 = !GPIOC->ODR.BITS.ODR13;
+    DEBUG(LOG_WARN, __FUNCTION__, "Nguyen %d", 28);
+    delay(1000);
+}
+
 int main(void)
 {
     init();
     
     while (1)
     {
-        loop();
+        ram_test();
     }
 }
 
@@ -16,13 +23,12 @@ void init(void)
     SystickConfig(71999);
     TraceInit();
     TestLed();
+    DEBUG(LOG_WARN, __FUNCTION__, "Address: %08X", ram_test);
 }
 
 void loop(void)
 {
-    GPIOC->ODR.BITS.ODR13 = !GPIOC->ODR.BITS.ODR13;
-    DEBUG(LOG_WARN, "LOOP", "Nguyen %d", 28);
-    delay(1000);
+    
 }
 
 void SystickConfig(uint32_t u32Reload)
