@@ -21,7 +21,7 @@ void setupHardware(void)
     RCC->CR.BITS.HSEON = 0x01;
     
     // Wait till HSE is ready
-    while (RCC->CR.BITS.HSERDY == 0);
+    while (RCC->CR.BITS.HSERDY == 0){};
     
     /* 2 wait states required on the flash. */
 	*((unsigned long * ) 0x40022000 ) = 0x02;

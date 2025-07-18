@@ -54,12 +54,12 @@ void SPI_SetupNSS(SPI_Typedef* xSpi, SPI_NSS Config)
 */
 void SPI_SetupClockMode(SPI_Typedef* xSpi, SPI_ClockMode Mode)
 {
-   if (Mode & BIT0 == BIT0)
+   if ((Mode & BIT0) == BIT0)
       xSpi->CR1.BITS.CPHA = SET;
    else
       xSpi->CR1.BITS.CPHA = RESET;
 
-   if (Mode & BIT1 == BIT1)
+   if ((Mode & BIT1) == BIT1)
       xSpi->CR1.BITS.CPOL = SET;
    else
       xSpi->CR1.BITS.CPOL = RESET;
@@ -76,12 +76,12 @@ void SPI_SetupClockMode(SPI_Typedef* xSpi, SPI_ClockMode Mode)
 */
 void SPI_SetupFrameFormat(SPI_Typedef* xSpi, SPI_FrameFormat Format)
 {
-   if (Format & BIT7 == BIT7)
+   if ((Format & BIT7) == BIT7)
       xSpi->CR1.BITS.LSBFIRST = SET;
    else
       xSpi->CR1.BITS.LSBFIRST = RESET;
 
-   if (Format & BIT11 == BIT11)
+   if ((Format & BIT11) == BIT11)
       xSpi->CR1.BITS.DFF = SET;
    else
       xSpi->CR1.BITS.DFF = RESET;

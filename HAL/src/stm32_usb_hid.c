@@ -192,7 +192,7 @@ void HID_SendKey(uint8_t modifier, uint8_t keycode)
 
 void HID_SendKeyString(char* str)
 {
-    char c = 0;
+    uint8_t c = 0;
     
     while (*str)
     {
